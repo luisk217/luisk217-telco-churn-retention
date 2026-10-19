@@ -7,7 +7,7 @@ name = "telco-churn-retention"
 version = "0.1.0"
 description = "Telecom customer churn prediction with cost-based decisions and SHAP explanations."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = "MIT"
 authors = [{ name = "Luis Carlos Hernández Urrego" }]
 dependencies = [
@@ -38,7 +38,7 @@ markers = ["integration: requiere red para descargar el dataset"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP", "S", "SIM", "N"]

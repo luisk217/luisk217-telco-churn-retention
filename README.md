@@ -1,7 +1,7 @@
 # Telco churn retention: who to call, and why it pays
 
 [![CI](https://github.com/luisk217/luisk217-telco-churn-retention/actions/workflows/ci.yml/badge.svg)](https://github.com/luisk217/luisk217-telco-churn-retention/actions/workflows/ci.yml)
-![Python](https://img.shields.io/badge/python-3.11%20%7C%203.13-blue)
+![Python](https://img.shields.io/badge/python-3.12%20%7C%203.13-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
 🇪🇸 [Leer en español](README.es.md)
