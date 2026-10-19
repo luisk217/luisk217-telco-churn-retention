@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"  # Semanal: detecta CVEs nuevas y cambios en la fuente de datos.
+
+# Mínimo privilegio: el workflow solo necesita leer el código.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint, seguridad y pruebas (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - name: Ruff (estilo y reglas de seguridad)
+        run: |
+          ruff check .
+          ruff format --check .
+      - name: Bandit (análisis estático de seguridad)
+        run: bandit -q -c pyproject.toml -r src app
+      - name: pip-audit (vulnerabilidades conocidas en dependencias)
+        run: pip-audit -r requirements.txt
+      - name: Pytest
+        run: pytest
+
+  end-to-end:
+    name: Entrenamiento con el dataset real
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -r requirements.txt
+      # Descarga la fuente pública, verifica su SHA-256 y entrena de punta a punta.
+      - run: churn train
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: reports/

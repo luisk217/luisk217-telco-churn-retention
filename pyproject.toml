@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "telco-churn-retention"
+version = "0.1.0"
+description = "Telecom customer churn prediction with cost-based decisions and SHAP explanations."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Luis Carlos Hernández Urrego" }]
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "scikit-learn>=1.5",
+    "xgboost>=2.1",
+    "shap>=0.46",
+    "matplotlib>=3.8",
+    "joblib>=1.4",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+app = ["streamlit>=1.40"]
+dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.6", "bandit>=1.7", "pip-audit>=2.7"]
+
+[project.scripts]
+churn = "churn.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --cov=churn --cov-report=term-missing"
+markers = ["integration: requiere red para descargar el dataset"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "SIM", "N"]
+ignore = ["N803", "N806"]  # X, X_train: convención de ML
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv"]

@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+# Datos y modelos se regeneran con `churn train`; no se versionan.
+data/raw/
+data/processed/
+models/
+.streamlit/secrets.toml
+.env

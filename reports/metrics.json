@@ -1,0 +1,45 @@
+{
+  "model": "xgboost",
+  "cv_pr_auc": {
+    "logistic_regression": 0.6665,
+    "xgboost": 0.6699
+  },
+  "threshold": 0.09,
+  "test_classification": {
+    "roc_auc": 0.8455,
+    "pr_auc": 0.6599,
+    "brier": 0.1356,
+    "precision": 0.4099,
+    "recall": 0.9492,
+    "f1": 0.5726
+  },
+  "test_classification_at_0_5": {
+    "roc_auc": 0.8455,
+    "pr_auc": 0.6599,
+    "brier": 0.1356,
+    "precision": 0.6772,
+    "recall": 0.516,
+    "f1": 0.5857
+  },
+  "test_campaign": {
+    "customers": 1409,
+    "contacted": 866,
+    "churners_total": 374,
+    "churners_contacted": 355,
+    "profit_model": 72536.08,
+    "profit_at_0_5": 45720.84,
+    "profit_no_campaign": 0.0,
+    "profit_contact_everyone": 62748.64,
+    "profit_perfect_oracle": 88623.64
+  },
+  "economics": {
+    "horizon_months": 12,
+    "retention_success_rate": 0.3,
+    "cost_per_contact": 25.0
+  },
+  "split_sizes": {
+    "train": 4225,
+    "val": 1409,
+    "test": 1409
+  }
+}

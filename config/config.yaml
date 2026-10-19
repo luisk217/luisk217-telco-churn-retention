@@ -1,0 +1,26 @@
+# Configuración del pipeline. Los valores económicos son supuestos de negocio
+# explícitos: ajústalos a la realidad de cada empresa.
+data:
+  # Fuente pública oficial de IBM (licencia Apache-2.0).
+  url: "https://raw.githubusercontent.com/IBM/telco-customer-churn-on-icp4d/master/data/Telco-Customer-Churn.csv"
+  # Huella SHA-256 del archivo esperado: si la fuente cambia, la descarga falla.
+  sha256: "16320c9c1ec72448db59aa0a26a0b95401046bef5d02fd3aeb906448e3055e91"
+  max_download_bytes: 5000000
+  raw_path: "data/raw/telco_customer_churn.csv"
+  db_path: "data/processed/telco.db"
+
+model:
+  random_state: 42
+  test_size: 0.2
+  val_size: 0.2
+  cv_folds: 5
+  artifacts_dir: "models"
+  reports_dir: "reports"
+
+economics:
+  # Meses de ingreso que se conservan si un cliente que iba a irse se queda.
+  horizon_months: 12
+  # Probabilidad de que la campaña retenga a un cliente que sí iba a irse.
+  retention_success_rate: 0.30
+  # Costo de contactar y ofrecer el incentivo a un cliente (misma moneda que MonthlyCharges).
+  cost_per_contact: 25.0

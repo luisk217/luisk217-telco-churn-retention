@@ -1,0 +1,46 @@
+feature,mean_abs_shap
+Contract = Month-to-month,0.6379213618694916
+tenure,0.4510532160862012
+MonthlyCharges,0.35071331748950973
+OnlineSecurity = No,0.22166688311959906
+Contract = Two year,0.20089930730899533
+InternetService = Fiber optic,0.1979184510188182
+TotalCharges,0.19415713182384328
+TechSupport = No,0.1627377711885764
+PaymentMethod = Electronic check,0.14134107013728536
+MultipleLines = No,0.11568478013525285
+PaperlessBilling = No,0.08993393724039866
+StreamingTV = Yes,0.07523341308237538
+OnlineBackup = No,0.0677304858414393
+Contract = One year,0.06661478527936075
+StreamingMovies = Yes,0.06591672373532216
+Dependents = No,0.05910332177535253
+InternetService = DSL,0.05133332172227591
+SeniorCitizen,0.04912403233500047
+PaperlessBilling = Yes,0.028053801144227498
+gender = Female,0.025997136569703958
+PhoneService = No,0.025912327883222515
+Dependents = Yes,0.020768702606579013
+InternetService = No,0.018219754070915563
+Partner = No,0.01604242241631475
+StreamingTV = No,0.014850347267701014
+PaymentMethod = Mailed check,0.013295347098305899
+PaymentMethod = Credit card (automatic),0.009190717912935506
+TechSupport = Yes,0.008603120443372834
+StreamingMovies = No,0.008564336001807744
+PaymentMethod = Bank transfer (automatic),0.007886974804538672
+OnlineBackup = Yes,0.007597311535036171
+OnlineSecurity = Yes,0.0064364256161596215
+MultipleLines = Yes,0.006364118356507693
+PhoneService = Yes,0.006184237779311479
+OnlineSecurity = No internet service,0.005772103219299006
+DeviceProtection = Yes,0.005254779318978811
+gender = Male,0.005220616611501206
+DeviceProtection = No,0.005129287222803836
+Partner = Yes,0.0025861720100700896
+OnlineBackup = No internet service,0.0
+MultipleLines = No phone service,0.0
+TechSupport = No internet service,0.0
+DeviceProtection = No internet service,0.0
+StreamingMovies = No internet service,0.0
+StreamingTV = No internet service,0.0
