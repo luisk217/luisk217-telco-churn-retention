@@ -2,14 +2,16 @@
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urlparse
 
 import yaml
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CONFIG_PATH = PROJECT_ROOT / "config" / "config.yaml"
+# El paquete puede instalarse en site-packages, así que la configuración se busca
+# en el directorio de trabajo (o en CHURN_CONFIG), no junto al código.
+DEFAULT_CONFIG_PATH = Path(os.environ.get("CHURN_CONFIG", "config/config.yaml"))
 
 
 class ConfigError(ValueError):
@@ -78,8 +80,14 @@ def _validate(cfg: Config) -> None:
         raise ConfigError("cost_per_contact no puede ser negativo.")
 
 
-def load_config(path: Path = DEFAULT_CONFIG_PATH, root: Path = PROJECT_ROOT) -> Config:
-    """Lee el YAML con `safe_load` (nunca `load`) y valida cada valor."""
+def load_config(path: Path = DEFAULT_CONFIG_PATH, root: Path | None = None) -> Config:
+    """Lee el YAML con `safe_load` (nunca `load`) y valida cada valor.
+
+    Las rutas del YAML son relativas a ``root``; por defecto, la carpeta que
+    contiene a ``config/`` (la raíz del proyecto).
+    """
+    path = Path(path).resolve()
+    root = (root or path.parent.parent).resolve()
     with open(path, encoding="utf-8") as fh:
         raw = yaml.safe_load(fh)
     try:

@@ -12,3 +12,4 @@ data/processed/
 models/
 .streamlit/secrets.toml
 .env
+build/

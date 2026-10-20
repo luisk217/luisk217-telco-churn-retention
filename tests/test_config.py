@@ -1,11 +1,15 @@
+from pathlib import Path
+
 import pytest
 import yaml
 
-from churn.config import DEFAULT_CONFIG_PATH, ConfigError, load_config
+from churn.config import ConfigError, load_config
+
+REPO_CONFIG = Path(__file__).resolve().parents[1] / "config" / "config.yaml"
 
 
 def _write(tmp_path, mutate):
-    raw = yaml.safe_load(DEFAULT_CONFIG_PATH.read_text(encoding="utf-8"))
+    raw = yaml.safe_load(REPO_CONFIG.read_text(encoding="utf-8"))
     mutate(raw)
     path = tmp_path / "config.yaml"
     path.write_text(yaml.safe_dump(raw), encoding="utf-8")
@@ -13,8 +17,9 @@ def _write(tmp_path, mutate):
 
 
 def test_default_config_is_valid():
-    cfg = load_config()
+    cfg = load_config(REPO_CONFIG)
     assert cfg.data.url.startswith("https://")
+    assert cfg.data.raw_path.is_relative_to(REPO_CONFIG.parents[1])
 
 
 def test_rejects_plain_http(tmp_path):
