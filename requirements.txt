@@ -2,7 +2,7 @@
 # Se usan en CI y en Streamlit Community Cloud para builds reproducibles.
 joblib==1.6.0
 matplotlib==3.11.2
-numpy==2.5.4
+numpy==2.5.5
 pandas==3.0.6
 PyYAML==6.0.3
 scikit-learn==1.9.1
